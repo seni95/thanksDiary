@@ -10,6 +10,7 @@ export default function App() {
   const [sayThanks, setSayThanks] = useState(true);
   const [thanksList, setThanksList] = useState({});
   const [text, setText] = useState("");
+  const [edittingText,setEdittingText] = useState("")
   const [countTodayWork, setCountTodayWork] = useState(0);
   const date = new Date();
   const year = date.getFullYear();
@@ -31,19 +32,32 @@ export default function App() {
 
   }
 
+ 
+
   const modifyStorage = async (key) => {
+
+    if (edittingText === "")
+    return;
+
     let newThanks = {...thanksList};
   
-    Object.assign(newThanks[key], { text: "like", sayThanks, date: today });
+    Object.assign(newThanks[key], { text: edittingText, sayThanks, date: today });
+    console.log(edittingText);
     console.log(newThanks);
     setThanksList(newThanks);
     await saveToStorage(newThanks);
+
+    setEdittingText("");
   }
 
   const onChangeText = (payload) => {
     setText(payload);
+    console.log(text);
   }
-
+  const onChangeEdittingText = (payload)=>{
+    setEdittingText(payload);
+    console.log(edittingText);
+  }
 
   const sayWish = () => {
     setSayThanks(false);
@@ -52,6 +66,7 @@ export default function App() {
     setSayThanks(true);
   }
 
+ 
   const addThanks = async () => {
     if (text === "")
       return;
@@ -174,8 +189,8 @@ export default function App() {
         {
           Object.keys(thanksList).reverse().map((key) =>
             thanksList[key].sayThanks == sayThanks ? (
-              <>
-                <View style={styles.toDo} key={key}>
+              <View key={key}>
+                <View style={styles.toDo}>
                   <Text>{Object.keys(thanksList).indexOf(key) + 1}번</Text>
                   <Text style={styles.toDoText}>{thanksList[key].text}</Text>
                   <TouchableOpacity>
@@ -187,13 +202,17 @@ export default function App() {
                   </TouchableOpacity>
                 </View>
                 {isModify == key ? <View>
-                  <TextInput style={styles.modify}
+                  <TextInput 
+                  style={styles.modify}
+                  onChangeText={onChangeEdittingText}
+                  value={edittingText}
+
                   ></TextInput>
                   <Button title="수정하기"
                     onPress={()=>{modifyStorage(key)}}
                   ></Button>
                 </View> : null}
-              </>
+              </View>
             ) : null)}
 
       </ScrollView>
