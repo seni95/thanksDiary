@@ -159,6 +159,8 @@ export default function App() {
     }
     , [thanksList])
 
+  
+
   return (
     <View style={{ ...styles.container, backgroundColor: sayThanks ? "#F8F8FA" : "black" }}>
       {/* 헤더 */}
@@ -190,6 +192,10 @@ export default function App() {
           Object.keys(thanksList).reverse().map((key) =>
             thanksList[key].sayThanks == sayThanks ? (
               <View key={key}>
+                {Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]==undefined?
+                <Text>{thanksList[key].date}</Text>:
+                thanksList[Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]].date
+                ===thanksList[key].date?null:<Text>{thanksList[key].date}</Text>}
                 <View style={styles.toDo}>
                   <Text>{Object.keys(thanksList).indexOf(key) + 1}번</Text>
                   <Text style={styles.toDoText}>{thanksList[key].text}</Text>
