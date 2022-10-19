@@ -12,6 +12,8 @@ export default function App() {
   const [text, setText] = useState("");
   const [edittingText,setEdittingText] = useState("")
   const [countTodayWork, setCountTodayWork] = useState(0);
+  const [listCounter , setListCounter] = useState([]);
+  const [listInitialKey,setListInitialKey] = useState([]);
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -52,11 +54,9 @@ export default function App() {
 
   const onChangeText = (payload) => {
     setText(payload);
-    console.log(text);
   }
   const onChangeEdittingText = (payload)=>{
     setEdittingText(payload);
-    console.log(edittingText);
   }
 
   const sayWish = () => {
@@ -159,7 +159,45 @@ export default function App() {
     }
     , [thanksList])
 
+  const countListDate = useMemo(
+()=>{
+  let listKeyArr = [];
+  let i=0;
+  Object.keys(thanksList).map((key)=>{
+  if(thanksList[Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]]!=undefined){
+    if(thanksList[key].date !=
+      thanksList[Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]].date)
+      {
+        listKeyArr[i]= key
+        i++;
+      }
+    } 
+  if(thanksList[Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]]==undefined){
+    listKeyArr[i]= key
+    i++;
+  }
+  })
+  let listCountArr =[];
+  for(let j = 0; j<listKeyArr.length;j++){
+    Object.keys(thanksList).map((key)=>{
+      if(thanksList[key].date == thanksList[listKeyArr[j]].date){
+        if(listCountArr[j]==null){
+        listCountArr[j] = 1;
+        }else{
+          listCountArr[j]++;
+        }
+
+      }
+    })
+  }
   
+      console.log(listKeyArr);
+      console.log(listCountArr);
+
+      setListInitialKey(listKeyArr)
+      setListCounter(listCountArr);
+
+    },[thanksList])
 
   return (
     <View style={{ ...styles.container, backgroundColor: sayThanks ? "#F8F8FA" : "black" }}>
@@ -192,10 +230,14 @@ export default function App() {
           Object.keys(thanksList).reverse().map((key) =>
             thanksList[key].sayThanks == sayThanks ? (
               <View key={key}>
+                <View style ={styles.showDate}>
                 {Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]==undefined?
                 <Text>{thanksList[key].date}</Text>:
                 thanksList[Object.keys(thanksList)[Object.keys(thanksList).indexOf(key)+1]].date
                 ===thanksList[key].date?null:<Text>{thanksList[key].date}</Text>}
+                {listInitialKey.indexOf(key)!=-1?
+                <Text>{listCounter[listInitialKey.indexOf(key)]}개</Text>:null}
+                </View>
                 <View style={styles.toDo}>
                   <Text>{Object.keys(thanksList).indexOf(key) + 1}번</Text>
                   <Text style={styles.toDoText}>{thanksList[key].text}</Text>
@@ -296,6 +338,12 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 10,
     marginVertical: 10
+  },
+  showDate:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    fontSize:30,
+    paddingTop:10
   }
 
 });
