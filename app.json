@@ -2,7 +2,7 @@
   "expo": {
     "name": "thanksDiary",
     "slug": "thanksDiary",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +21,22 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["com.google.android.c2dm.permission.RECEIVE",
+      "com.anddoes.launcher.permission.UPDATE_COUNT",
+      "com.majeur.launcher.permission.UPDATE_BADGE",
+      "com.google.android.providers.gsf.permission.READ_GSERVICES",
+      "com.sonyericsson.home.permission.BROADCAST_BADGE",
+      "com.htc.launcher.permission.READ_SETTINGS",
+      "com.htc.launcher.permission.UPDATE_SHORTCUT",
+      "com.sec.android.provider.badge.permission.READ",
+      "com.sec.android.provider.badge.permission.WRITE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.lovelyseyeon.thanksDiary",
+      "versionCode":2
+    
     },
     "web": {
       "favicon": "./assets/favicon.png"

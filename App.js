@@ -30,6 +30,8 @@ export default function App() {
       setIsModify(false);
     else {
       setIsModify(key);
+      let newThanks = {...thanksList};  
+      setEdittingText(newThanks[key].text);
     }
 
   }
@@ -41,15 +43,13 @@ export default function App() {
     if (edittingText === "")
     return;
 
-    let newThanks = {...thanksList};
-  
-    Object.assign(newThanks[key], { text: edittingText, sayThanks, date: today });
-    console.log(edittingText);
-    console.log(newThanks);
+    let newThanks = {...thanksList};  
+    Object.assign(newThanks[key], { text: edittingText, sayThanks, date: newThanks[key].date });
     setThanksList(newThanks);
     await saveToStorage(newThanks);
 
     setEdittingText("");
+    setIsModify(false);
   }
 
   const onChangeText = (payload) => {
@@ -151,8 +151,6 @@ export default function App() {
       Object.keys(thanksList).map((key) => {
         if (thanksList[key].date == today) {
           i++;
-          console.log(thanksList[key].date);
-          console.log(today);
         }
         setCountTodayWork(i);
       })
@@ -191,8 +189,6 @@ export default function App() {
     })
   }
   
-      console.log(listKeyArr);
-      console.log(listCountArr);
 
       setListInitialKey(listKeyArr)
       setListCounter(listCountArr);
@@ -221,7 +217,7 @@ export default function App() {
         ></TextInput>
         <Button
           onPress={addThanks}
-          title="작성하기"></Button>
+          title={sayThanks?"작성하기":"전달하기"}></Button>
       </View>
 
       {/* 감사리스트 */}
@@ -264,18 +260,16 @@ export default function App() {
             ) : null)}
 
       </ScrollView>
-
-      <View style={styles.footer}>
+{sayThanks?<View style={styles.footer}>
         <View style={styles.footerText}>
           <Text>총{Object.keys(thanksList).length}개의 감사</Text>
-          <Text>오늘의 감사: {countTodayWork}개
-
-          </Text>
-        </View>
-        <Button
+          <Text>오늘의 감사: {countTodayWork}개</Text>       
+          </View> 
+          <Button
           onPress={removeValue}
+          style={styles.sendingButton}
           title="우주로 감사 전송하기"></Button>
-      </View>
+      </View>:null}      
     </View>
   );
 }
@@ -344,6 +338,8 @@ const styles = StyleSheet.create({
     justifyContent:"space-between",
     fontSize:30,
     paddingTop:10
+  },
+  sendingButton:{
   }
 
 });
