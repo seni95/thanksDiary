@@ -1,0 +1,19 @@
+{
+    "build": {
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal"
+      },
+      "preview": {
+        "distribution": "internal"
+      },
+      "production": {}
+    },
+    "submit":{
+        "production":{
+            "android":{
+                "serviceAccountKeyPath" : "pc-api-4696555087832786938-388-c2b0c865bdcf.json"
+            }
+        }
+    }
+  }
