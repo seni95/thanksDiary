@@ -21,25 +21,31 @@
       "supportsTablet": true
     },
     "android": {
-      "permissions": ["com.google.android.c2dm.permission.RECEIVE",
-      "com.anddoes.launcher.permission.UPDATE_COUNT",
-      "com.majeur.launcher.permission.UPDATE_BADGE",
-      "com.google.android.providers.gsf.permission.READ_GSERVICES",
-      "com.sonyericsson.home.permission.BROADCAST_BADGE",
-      "com.htc.launcher.permission.READ_SETTINGS",
-      "com.htc.launcher.permission.UPDATE_SHORTCUT",
-      "com.sec.android.provider.badge.permission.READ",
-      "com.sec.android.provider.badge.permission.WRITE"],
+      "permissions": [
+        "com.google.android.c2dm.permission.RECEIVE",
+        "com.anddoes.launcher.permission.UPDATE_COUNT",
+        "com.majeur.launcher.permission.UPDATE_BADGE",
+        "com.google.android.providers.gsf.permission.READ_GSERVICES",
+        "com.sonyericsson.home.permission.BROADCAST_BADGE",
+        "com.htc.launcher.permission.READ_SETTINGS",
+        "com.htc.launcher.permission.UPDATE_SHORTCUT",
+        "com.sec.android.provider.badge.permission.READ",
+        "com.sec.android.provider.badge.permission.WRITE"
+      ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.lovelyseyeon.thanksDiary",
-      "versionCode":4
-    
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6ee0c178-4842-4531-8cc3-a8a8583c3e71"
+      }
     }
   }
 }

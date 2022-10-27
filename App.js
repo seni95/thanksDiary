@@ -222,8 +222,7 @@ export default function App() {
 
       {/* 감사리스트 */}
       <ScrollView>
-        {
-          Object.keys(thanksList).reverse().map((key) =>
+        {Object.keys(thanksList).reverse().map((key) =>
             thanksList[key].sayThanks == sayThanks ? (
               <View key={key}>
                 <View style ={styles.showDate}>
@@ -250,6 +249,7 @@ export default function App() {
                   style={styles.modify}
                   onChangeText={onChangeEdittingText}
                   value={edittingText}
+                  multiline
 
                   ></TextInput>
                   <Button title="수정하기"
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   toDoText: {
-    fontSize: 16,
+    fontSize: 12,
     paddingLeft: 20,
     width: "70%"
   },
