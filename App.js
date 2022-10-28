@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
 
@@ -269,7 +270,8 @@ export default function App() {
           onPress={removeValue}
           style={styles.sendingButton}
           title="우주로 감사 전송하기"></Button>
-      </View>:null}      
+      </View>:null} 
+      <StatusBar style="black" />     
     </View>
   );
 }
@@ -284,7 +286,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 100,
+    marginTop: 80,
     paddingBottom: 10,
   },
   input: {
@@ -296,9 +298,9 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "600",
-    paddingHorizontal: 3
+    paddingHorizontal: 3,
   },
   toDo: {
     borderBottomColor: "gray",
