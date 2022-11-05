@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   toDo: {
     borderBottomColor: "gray",
     borderBottomWidth: 2,
-    marginBottom: 10,
+    marin:10,
     padding: 20,
     flexDirection: "row",
     alignItems: "center",
